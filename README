@@ -1,0 +1,50 @@
+Code package implementing Neural Extrapolation Technique - NExT.
+
+For any questions regarding the code please contact the authors.
+
+To reproduce the papers result:
+    1. Spherical Harmonic experiments: run main_spherical_harmonic_experiment.py
+    2. Main 1 dimensional extrapolation experiments: run main_function_extrapolation.py
+    3. Anchor function experiments: run main_anchor_function_solution.py
+    4. Run baseline deep learning models: run main_advanced_baselines_extrapolation.py
+    5. LS test: in each corresponding experiment there will be a train_ls... and test_ls...
+
+
+Usage for new data sets:
+
+# Define the function generator
+generator = FunctionCoefGenerator(batch_size=25,
+                                      max_degree=deg_to_predict,
+                                      min_degree=deg_to_predict,
+                                      polynomial_type="spherical_harmonics",
+                                      add_noise_to_input=True,
+                                      norm_mean=1,
+                                      norm_std=0.25,
+                                      extrapolation_distance_from_approximation=extrapolation_distance_from_approximation)
+
+# Initialize the network
+model = ExtrapolationCoefNN(num_layers=10, num_out=max_deg,
+                                inner_layer_width=100,
+                                generator=generator)
+
+# Initialize the network with the correct loss as in Eq. 11
+model.compile(optimizer=opt,
+                  loss={
+                      "ext": tf.keras.losses.MeanSquaredError(),
+                      "coefs": tf.keras.losses.MeanSquaredError(),
+                      "special": InfiniteExtrapolationPointMSELoss(
+                          start_point=generator.extrapolation_start_point,
+                          end_point=generator.end_point,
+                          basis_len=max_deg,
+                          polynomial_type=generator.polynomial_type,
+                          basis_functions=generator.poly_layer.create_poly_basis_functions(max_deg))
+                  },
+                  metrics=reset_metrics(EXTRAPOLATION_METRICS),
+                  loss_weights={"int": 0.0, "coefs": 0.0, "ext": 0.0, "special": 1.0})
+
+# Train the model
+history = model.fit(generator,
+                        epochs=2500 if monotonic else 3400,
+                        batch_size=batch_size,
+                        callbacks=[LearningRateDecay(decay_each_n_epochs=1000, minimum_learning_rate=0.00001)],
+                        verbose=2)

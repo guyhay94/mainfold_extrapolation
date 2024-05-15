@@ -1,0 +1,5 @@
+learning rate =0.0001
+epochs = 1000
+minimum_learning_rate=0.00001
+learning decay 200 factor 0.1
+10 inner layers of TanH with a width of 100

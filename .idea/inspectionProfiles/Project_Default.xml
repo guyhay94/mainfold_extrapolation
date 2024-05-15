@@ -1,0 +1,41 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="11">
+            <item index="0" class="java.lang.String" itemvalue="sphinx" />
+            <item index="1" class="java.lang.String" itemvalue="catboost" />
+            <item index="2" class="java.lang.String" itemvalue="xgbfir" />
+            <item index="3" class="java.lang.String" itemvalue="mlxtend" />
+            <item index="4" class="java.lang.String" itemvalue="matplotlib" />
+            <item index="5" class="java.lang.String" itemvalue="statsmodels" />
+            <item index="6" class="java.lang.String" itemvalue="hyperopt" />
+            <item index="7" class="java.lang.String" itemvalue="rfpimp" />
+            <item index="8" class="java.lang.String" itemvalue="category_encoders" />
+            <item index="9" class="java.lang.String" itemvalue="xgboost" />
+            <item index="10" class="java.lang.String" itemvalue="openpyxl" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N803" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStatementEffectInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="object.predict_proba" />
+          <option value="object.score_samples" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
