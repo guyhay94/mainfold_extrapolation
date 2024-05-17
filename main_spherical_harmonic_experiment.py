@@ -435,7 +435,7 @@ def main():
         name=f"ls_deg_3",
         extrapolation_distance_from_approximation=np.pi / 6)
 
-    function_index = 65
+    function_index = 66
     deg_vis = 9
 
     print("IE")
